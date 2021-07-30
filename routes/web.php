@@ -1,13 +1,13 @@
 <?php
 
-
-
+use App\Http\Livewire\Admin\AdminDashboardComponent;
 use Livewire\Component;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\HomeComponet;
+use App\Http\Livewire\User\UserDashboardComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +35,20 @@ Route::get('/cart',CartComponent::class);
 
 Route::get('/shop',ShopComponent::class);
 //View de Pagamento
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('dashboard');*/
+
+//Rota para Usuario
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    Route::get('/user/dashboard',UserDashboardComponent::class)->name('user.dashboard');
+
+
+});
+//Rota para Adminstrador
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+
+    Route::get('/admin/dashboard',AdminDashboardComponent::class)->name('admin.dashboard');;
+
+});
