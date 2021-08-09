@@ -81,11 +81,15 @@
 												</li>
 
                                                 <li class="menu-item" >
-                                                    <a title="Categories" href="{{route('admin.categories')}}">Categories</a>
+                                                    <a title="Categories" href="{{route('admin.categories')}}">Todas as Categorias</a>
                                                     </li>
 
                                                     <li class="menu-item" >
-                                                        <a title="Produtos" href="{{route('admin.products')}}">Produtos</a>
+                                                        <a title="Produtos" href="{{route('admin.products')}}">Todos os Produtos</a>
+                                                        </li>
+
+														<li class="menu-item" >
+                                                        <a title="Manage Home Page" href="{{route('admin.homeslider')}}">Gestão de Slides</a>
                                                         </li>
 
 												<li class="menu-item" >
