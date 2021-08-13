@@ -29,44 +29,51 @@
                                      <label class="col-md-4 control-label"> Nome do Produto </label>
                                      <div class="col-md-4">
                                         <input type="text" placeholder="Nome do Produto" class="form-control input-md" wire:model="name" wire:keyup="generateSlug"/>
-                                     </div>
+                                        @error('name') <p class="text-danger">{{$message}}</p>@enderror
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-4 control-label"> Produto Slug </label>
                                     <div class="col-md-4">
                                        <input type="text" placeholder="Produto Slug" class="form-control input-md" wire:model="slug"/>
+                                       @error('slug') <p class="text-danger">{{$message}}</p>@enderror
                                     </div>
                                </div>
                                <div class="form-group">
                                 <label class="col-md-4 control-label"> Pequena Descrição </label>
                                 <div class="col-md-4">
                                    <textarea  placeholder="Pequena Descrição" class="form-control" wire:model="short_description"></textarea>
+                                   @error('short_description') <p class="text-danger">{{$message}}</p>@enderror
                                 </div>
                            </div>
                            <div class="form-group">
                             <label class="col-md-4 control-label"> Descrição do Produto </label>
                             <div class="col-md-4">
                                <textarea  placeholder="Descrição do Produto" class="form-control" wire:model="description"></textarea>
+                               @error('description') <p class="text-danger">{{$message}}</p>@enderror
                             </div>
                        </div>
                            <div class="form-group">
                                <label class="col-md-4 control-label"> Preço Regular </label>
                                <div class="col-md-4">
                                   <input type="text" placeholder="Preço Regular" class="form-control input-md" wire:model="regular_price"/>
-                               </div>
+                                  @error('regular_price') <p class="text-danger">{{$message}}</p>@enderror
+                                </div>
                           </div>
 
                           <div class="form-group">
                             <label class="col-md-4 control-label"> Preço de Venda </label>
                             <div class="col-md-4">
                                <input type="text" placeholder="Preço de Venda" class="form-control input-md" wire:model="sale_price"/>
+                              
                             </div>
                        </div>
                        <div class="form-group">
                             <label class="col-md-4 control-label"> SKU </label>
                             <div class="col-md-4">
                             <input type="text" placeholder="SKU" class="form-control input-md" wire:model="SKU">
-                            </div>
+                            @error('SKU') <p class="text-danger">{{$message}}</p>@enderror
+                        </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-4 control-label"> Stock </label>
@@ -75,6 +82,7 @@
                                 <option value="instock">Disponível</option>
                                 <option value="outstock">Indisponível</option>
                             </select>
+                            @error('stock_status') <p class="text-danger">{{$message}}</p>@enderror
                             </div>
                         </div>
 
@@ -85,6 +93,7 @@
                                 <option value="0">Não</option>
                                 <option value="1">Sim</option>
                             </select>
+                            
                             </div>
                         </div>
 
@@ -92,6 +101,7 @@
                             <label class="col-md-4 control-label"> Quantidade </label>
                             <div class="col-md-4">
                                <input type="text" placeholder="Quantidade" class="form-control input-md" wire:model="quantity">
+                               @error('quantity') <p class="text-danger">{{$message}}</p>@enderror
                             </div>
                        </div>
 
@@ -106,6 +116,7 @@
 
                             <img src="{{asset('assets/images/products')}}/{{$image}}" width="120">
                             @endif
+                            @error('newimage') <p class="text-danger">{{$message}}</p>@enderror
                         </div>
                    </div>
 
@@ -118,6 +129,7 @@
                                 @foreach ($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
+                                @error('category_id') <p class="text-danger">{{$message}}</p>@enderror
                                 </select>
                             </div>
                         </div>

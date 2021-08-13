@@ -16,8 +16,10 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset ('assets/css/chosen.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{ asset ('assets/css/style.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{ asset ('assets/css/color-01.css')}}">
-
-    @livewireStyles
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.css" integrity="sha512-40vN6DdyQoxRJCw0klEUwZfTTlcwkOLKpP8K8125hy9iF4fi8gPpWZp60qKC6MYAFaond8yQds7cTMVU8eMbgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	@livewireStyles
 </head>
 <body class="home-page home-01 ">
 
@@ -90,6 +92,14 @@
 
 														<li class="menu-item" >
                                                         <a title="Manage Home Page" href="{{route('admin.homeslider')}}">Gestão de Slides</a>
+                                                        </li>
+
+														<li class="menu-item" >
+                                                        <a title="Manage Home Categories" href="{{route('admin.homecategories')}}">Gestão de Categorias no Home</a>
+                                                        </li>
+
+														<li class="menu-item" >
+                                                        <a title="Manage Sale" href="{{route('admin.sale')}}">Gestão de Vendas</a>
                                                         </li>
 
 												<li class="menu-item" >
@@ -481,6 +491,14 @@
 	<script src="{{asset ('assets/js/jquery.countdown.min.js')}}"></script>
 	<script src="{{asset ('assets/js/jquery.sticky.js')}}"></script>
 	<script src="{{asset ('assets/js/functions.js')}}"></script>
-    @livewireScripts
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js" integrity="sha512-jWNpWAWx86B/GZV4Qsce63q5jxx/rpWnw812vh0RE+SBIo/mmepwOSQkY2eVQnMuE28pzUEO7ux0a5sJX91g8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+
+	<script src="https://cdn.tiny.cloud/1/yabxeefxlxhy2253utqgzd8coqt2s5wkmepcj3660kw42w5s/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	@livewireScripts
+	@stack('scripts')
 </body>
 </html>
