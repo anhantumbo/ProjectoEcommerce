@@ -12,17 +12,17 @@
     <div class=" main-content-area">
 
         <div class="wrap-iten-in-cart">
-            @if(Session::has('success_message'))
-        <div class="alert alert-success">
-              <strong>Success</strong>{{Session::get('success_message')}}
+                     @if(Session::has('success_message'))
+                    <div class="alert alert-success">
+                             <strong>Success</strong>{{Session::get('success_message')}}
 
-        </div>
-        @endif
+                     </div>
+                    @endif
 
-            @if(Cart::count() > 0)
+            @if(Cart::instance('cart')->count() > 0)
             <h3 class="box-title">Products Name</h3>
             <ul class="products-cart">
-                @foreach (Cart::content() as $item)
+                @foreach (Cart::instance('cart')->content() as $item)
                 <li class="pr-cart-item">
 
 
@@ -39,6 +39,7 @@
                             <a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></a>
                             <a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"></a>
                         </div>
+                        <p class="text-center" wire:click.prevent="switchToSaveForLater('{{$item->rowId}}')"><a href="#">Salvar para Depois</a></p>
                     </div>
                     <div class="price-field sub-total"><p class="price">{{$item->subtotal}}</p></div>
                     <div class="delete">
@@ -53,20 +54,57 @@
             @else
             <p>No item in Cart</p>
             @endif
-        </div>
+    </div>
 
         <div class="summary">
             <div class="order-summary">
                 <h4 class="title-box">Order Summary</h4>
-                <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{Cart::subtotal()}}</b></p>
-                <p class="summary-info"><span class="title">Tax</span><b class="index">${{Cart::tax()}}</b></p>
+                <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{Cart::instance('cart')->subtotal()}}</b></p>
+                 @if(Session::has('coupon'))
+                 <p class="summary-info"><span class="title">Desconto ({{Session::get('coupon')['code']}}) <a href="#" wire:click.prevent="removeCoupon"><i class="fa fa-times text-danger"></i></a></span><b class="index"> -${{number_format($desconto,2)}}</b></p>
+                 <p class="summary-info"><span class="title">Tax {{config('cart_tax')}}%  ({{Session::get('coupon')['code']}})</span><b class="index">${{number_format($taxDespoisDesconto,2)}}</b></p>
+                 <p class="summary-info"><span class="title">Subtotal com Desconto</span><b class="index">${{number_format($subtotalDepoisDesconto,2)}}</b></p>
+
+                 <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{number_format($totalDepoisDesconto,2)}}</b></p>
+                 @else
+                 <p class="summary-info"><span class="title">Tax</span><b class="index">${{Cart::instance('cart')->tax()}}</b></p>
                 <p class="summary-info total-info "><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
-                <p class="summary-info total-info "><span class="title">Total</span><b class="index">{{Cart::total()}}</b></p>
+                <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{Cart::instance('cart')->total()}}</b></p>
+                 
+                 @endif
+                
             </div>
+
+           
             <div class="checkout-info">
+            @if(!Session::has('coupon'))
                 <label class="checkbox-field">
-                    <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
+                    <input class="frm-input " name="have-code" id="have-code" value="1" wire:model="haveCouponCode" type="checkbox"><span>I have coupon code</span>
                 </label>
+                @if($haveCouponCode == 1)
+                    <div class="summary-item">
+                    <form wire:submit.prevent="applyCouponCode">
+                    <h4 class="title-box">Coupon code</h4>
+                    @if(Session::has('coupon_message'))
+
+                    <div class="alert alert-danger" role="danger" wire:model="couponCode" />
+                    
+                    <strong>Invalído</strong> {{Session::get('coupon_message')}}
+                    
+                    </div>
+
+                    @endif
+                    <p class="row-in-form">
+                        <label for="coupon-code">Enter Your Coupon Code</label>
+                        <input type="text" name="coupon-code" wire:model="couponCode"/>
+                        
+                    </p>
+                    <button type="submit" class="btn btn-small">Apply</button>
+                    </form>
+                    
+                    </div>
+                @endif
+                @endif
                 <a class="btn btn-checkout" href="checkout.html">Check out</a>
                 <a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
             </div>
@@ -76,6 +114,49 @@
             </div>
         </div>
 
+        <div class=" main-content-area">
+         <h3 class="title-box" style="border-bottom: 1px solid; padding-bottom: 15px;">{{Cart::instance('saveForLater')->count()}} Salvar Para Depois</h3>
+        <div class="wrap-iten-in-cart">
+             @if(Session::has('s_success_message'))
+            <div class="alert alert-success">
+                     <strong>Success</strong>{{Session::get('s_success_message')}}
+
+             </div>
+            @endif
+
+    @if(Cart::instance('saveForLater')->count() > 0)
+    <h3 class="box-title">Nome do Produto</h3>
+    <ul class="products-cart">
+        @foreach (Cart::instance('saveForLater')->content() as $item)
+        <li class="pr-cart-item">
+
+
+            <div class="product-image">
+                <figure><img src="{{ asset('assets/images/products')}}/{{$item->model->image}}" alt="{{$item->model->name}}"></figure>
+            </div>
+            <div class="product-name">
+                <a class="link-to-product" href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->model->name}}</a>
+            </div>
+            <div class="price-field produtc-price"><p class="price">{{$item->model->regular_price}}</p></div>
+            <div class="quantity">
+                
+                <p class="text-center" wire:click.prevent="moveToCart('{{$item->rowId}}')"><a href="#">Move para o Carinho</a></p>
+            </div>
+            <div class="price-field sub-total"><p class="price">{{$item->subtotal}}</p></div>
+            <div class="delete">
+                <a href="#" wire:click.prevent="deleteFromSaveForLater('{{$item->rowId}}')"class="btn btn-delete" title="">
+                    <span>Delete from your cart</span>
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </a>
+            </div>
+        </li>
+        @endforeach
+    </ul>
+    @else
+    <p>Nenhum produto foi salvo para depois</p>
+    @endif
+</div>
+
         <div class="wrap-show-advance-info-box style-1 box-in-site">
             <h3 class="title-box">Most Viewed Products</h3>
             <div class="wrap-products">
@@ -84,7 +165,7 @@
                     <div class="product product-style-2 equal-elem ">
                         <div class="product-thumnail">
                             <a href="#" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                <figure><img src="{{ asset('assets/images/products/digital_04.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
+                                <figure><img src="{{ asset('assets/images/products/digital_4.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                             </a>
                             <div class="group-flash">
                                 <span class="flash-item new-label">new</span>
@@ -139,7 +220,7 @@
                     <div class="product product-style-2 equal-elem ">
                         <div class="product-thumnail">
                             <a href="#" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                <figure><img src="{{ asset('assets/images/products/digital_01.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
+                                <figure><img src="{{ asset('assets/images/products/digital_1.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                             </a>
                             <div class="group-flash">
                                 <span class="flash-item bestseller-label">Bestseller</span>
@@ -172,7 +253,7 @@
                     <div class="product product-style-2 equal-elem ">
                         <div class="product-thumnail">
                             <a href="#" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                <figure><img src="{{ asset('assets/images/products/digital_03.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
+                                <figure><img src="{{ asset('assets/images/products/digital_3.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                             </a>
                             <div class="group-flash">
                                 <span class="flash-item sale-label">sale</span>
@@ -190,7 +271,7 @@
                     <div class="product product-style-2 equal-elem ">
                         <div class="product-thumnail">
                             <a href="#" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                <figure><img src="{{ asset('assets/images/products/digital_04.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
+                                <figure><img src="{{ asset('assets/images/products/digital_4.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                             </a>
                             <div class="group-flash">
                                 <span class="flash-item new-label">new</span>
@@ -208,7 +289,7 @@
                     <div class="product product-style-2 equal-elem ">
                         <div class="product-thumnail">
                             <a href="#" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                <figure><img src="{{ asset('assets/images/products/digital_05.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
+                                <figure><img src="{{ asset('assets/images/products/digital_5.jpg')}}" width="214" height="214" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
                             </a>
                             <div class="group-flash">
                                 <span class="flash-item bestseller-label">Bestseller</span>
