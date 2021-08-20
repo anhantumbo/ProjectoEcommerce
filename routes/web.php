@@ -26,6 +26,7 @@ use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\PageWishlistComponent;
 use App\Http\Livewire\SearchComponent;
+use App\Http\Livewire\ThankyouComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 
 
@@ -52,6 +53,9 @@ Route::get('/',HomeComponent::class);
 //View de loja de Compras
 
 Route::get('/checkout',CheckoutComponent::class);
+
+Route::get('/thankyou',ThankyouComponent::class);
+
 //View do Carinho de Compras
 Route::get('/cart',CartComponent::class)->name('product.cart');
 
@@ -98,4 +102,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/admin/coupons',AdminCouponsComponent::class)->name('admin.coupons');
     Route::get('/admin/coupon/add',AdminAddCouponsComponent::class)->name('admin.addcoupon');
     Route::get('/admin/coupon/edit/{coupon_id}',AdminEditCouponsComponent::class)->name('admin.editcoupon');
+    
+
 });
