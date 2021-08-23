@@ -106,6 +106,10 @@
                                                         <a title="Manage Sale" href="{{route('admin.coupons')}}">Gestão de Coupons</a>
                                                         </li>
 
+														<li class="menu-item" >
+                                                        <a title="Todos Pedidos" href="{{route('admin.orders')}}">Todos Pedidos</a>
+                                                        </li>
+
 
 												<li class="menu-item" >
 												<a  href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -121,7 +125,10 @@
 											<a title="Minha Conta" href="#">Minha Conta ({{Auth::user()->name}})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 											<ul class="submenu curency" >
 												<li class="menu-item" >
-													<a title="Dashboard" href="{{route('user.dashboard')}}">Dashboard</a>
+													<a title="Dashboard" href="#">Dashboard</a>
+												</li>
+												<li class="menu-item" >
+													<a title="Minhas Compras" href="{{route('user.orders')}}">Minhas Compras</a>
 												</li>
 												<li class="menu-item" >
 												<a  href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
