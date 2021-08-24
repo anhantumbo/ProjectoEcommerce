@@ -1,21 +1,70 @@
 <div>
     <div class="container" style="padding: 30px 0;">
+    <div class="row">
+        <div class="col-md-12">
+               <div class="panel panel-default">
+                     <div class="panel-heading">
+                           <div class="row">
+
+                                <div class="col-md-6">
+                                Order Details
+                                </div>
+                                <div class="col-md-6">
+                                <a href="{{route('admin.orders')}}" class="btn btn-success pull-right">Todas vendas</a>
+                                
+                                </div>
+                        
+                            </div>
+                       
+                        </div>
+
+                        <div class="panel-body">
+                          <table class="table">
+                            <tr>
+                               <th>Order Id</th>
+                               <td>{{$order->id}}</td>
+                               <th>Order Date</th>
+                               <td>{{$order->created_at}}</td>
+                               <th>Status</th>
+                               <td>{{$order->status}}</thd>
+                               @if($order->status == "delivered")
+                               <th>Delivery Date</th>
+                               <td>{{$order->delivered_date}}</td>
+                               @elseif($order->status == "canceled")
+                               <th>Cancellation Date</th>
+                               <td>{{$order->canceled_date}}</td>
+                               @endif
+                            
+                            </tr>
+                          
+                          </table>
+                        
+                        </div>
+               
+               
+               </div>
+        
+        </div>
+    
+    </div>
+
+
         <div class="row">
        
           <div class="col-md-12">
               <div class="panel panel-default">
                         <div class="panel-heading">
-                        <div class="row">
+                           <div class="row">
 
-                        <div class="col-md-6">
-                        Ordered Items
-                        </div>
-                        <div class="col-md-6">
-                          <a href="{{route('admin.orders')}}" class="btn btn-success pull-right">Todas vendas</a>
+                                <div class="col-md-6">
+                                Ordered Items
+                                </div>
+                                <div class="col-md-6">
+                                <a href="{{route('admin.orders')}}" class="btn btn-success pull-right">Todas vendas</a>
+                                
+                                </div>
                         
-                        </div>
-                        
-                        </div>
+                            </div>
                        
                         </div>
                         <div class="panel-body">

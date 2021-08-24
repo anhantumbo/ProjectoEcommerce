@@ -33,6 +33,7 @@ use App\Http\Livewire\ThankyouComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
 use App\Http\Livewire\User\UserOrdersDetailsComponent;
+use App\Http\Livewire\User\UserReviewComponent;
 use Illuminate\Support\Facades\Route;
 
 
@@ -82,7 +83,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/user/dashboard',UserDashboardComponent::class)->name('user.dashboard');
     Route::get('/user/dashboard',UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/orders/{order_id}',UserOrdersDetailsComponent::class)->name('user.orderdetails');
-
+    Route::get('/user/review/{order_item_id}',UserReviewComponent::class)->name('user.review');
 });
 //Rota para Adminstrador
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){

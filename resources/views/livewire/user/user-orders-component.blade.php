@@ -14,7 +14,7 @@
    
    </style>
     <div class="container" style="padding: 30px 0;">
-
+      
       <div class="col-md-12">
             <div class="panel panel-default">
             <div class="panel-heading">
@@ -58,7 +58,7 @@
                     <td>{{$order->email}}</td>
                     <td>{{$order->status}}</td>
                     <td>{{$order->created_at}}</td>
-                    <td>{{$order->created_at}}</td>
+                    
                     <td>
                      <a href="{{route('user.orderdetails',['order_id'=>$order->id])}}" class="btn btn-info btn-sm"> Detalhes</a>
                                     

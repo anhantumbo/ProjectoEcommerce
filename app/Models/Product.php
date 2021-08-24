@@ -16,4 +16,6 @@ class Product extends Model
 
           return $this->belongstO(Category::class,'category_id');
     }
+
+    
 }
