@@ -110,6 +110,10 @@
                                                         <a title="Todos Pedidos" href="{{route('admin.orders')}}">Todos Pedidos</a>
                                                         </li>
 
+														<li class="menu-item" >
+                                                        <a title="Settings" href="{{route('admin.settings')}}">Definições</a>
+                                                        </li>
+
 
 												<li class="menu-item" >
 												<a  href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -129,6 +133,10 @@
 												</li>
 												<li class="menu-item" >
 													<a title="Minhas Compras" href="{{route('user.orders')}}">Minhas Compras</a>
+												</li>
+
+												<li class="menu-item" >
+													<a title="Change Password" href="{{route('user.changepassword')}}">Mudar Password</a>
 												</li>
 												<li class="menu-item" >
 												<a  href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

@@ -69,7 +69,7 @@
                   
                     <h3 class="box-title">Products Name</h3>
                     <ul class="products-cart">
-                        @foreach ($order->orderItems as $item)
+                    @foreach ($order->orderItems as $item)
                         <li class="pr-cart-item">
 
 

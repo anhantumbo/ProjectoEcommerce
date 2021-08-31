@@ -11,7 +11,7 @@ class Review extends Model
 
     protected $table= "reviews";
 
-    public function orerItem(){
+    public function orderItem(){
 
         return $this->belongsTo(OrderItem::class);
     }
