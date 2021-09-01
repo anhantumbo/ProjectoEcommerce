@@ -1,5 +1,5 @@
 
-<x-guest-layout>
+<x-index-layout>
 
 <main id="main" class="main-site left-sidebar">
 
@@ -49,4 +49,4 @@
 
 </main>
 
-</x-guest-layout>
+</x-index-layout>
