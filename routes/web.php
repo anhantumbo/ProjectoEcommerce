@@ -12,6 +12,7 @@ use App\Http\Livewire\Admin\AdminEditProductComponent;
 
 use App\Http\Livewire\Admin\AdminHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminAddHomeSliderComponent;
+use App\Http\Livewire\Admin\AdminContactComponent;
 use App\Http\Livewire\Admin\AdminCouponsComponent;
 use App\Http\Livewire\Admin\AdminEditCouponsComponent;
 use App\Http\Livewire\Admin\AdminEditHomeSliderComponent;
@@ -28,6 +29,7 @@ use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\CategoryComponent;
+use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\PageWishlistComponent;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\ThankyouComponent;
@@ -69,6 +71,8 @@ Route::get('/cart',CartComponent::class)->name('product.cart');
 Route::get('/shop',ShopComponent::class);
 //View de Pagamento
 
+Route::get('/contact-us',ContactComponent::class)->name('contact');
+//View de Pagamento
 Route::get('/product/{slug}',DetailsComponent::class)->name('product.details');
 //View de Pagamento
 
@@ -117,4 +121,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/admin/orders/{order_id}',AdminOrderDetailsComponent::class)->name('admin.orderdetails');
     
     Route::get('/admin/settings',AdminSettingComponent::class)->name('admin.settings');
+
+    Route::get('/admin/contact-us',AdminContactComponent::class)->name('admin.contact');
 });

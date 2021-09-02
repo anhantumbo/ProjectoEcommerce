@@ -6,9 +6,11 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Shipping;
 use Livewire\Component;
+use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutComponent extends Component
 {   
@@ -182,7 +184,8 @@ class CheckoutComponent extends Component
             $this->thankyou = 1;
             Cart::instance('cart')->destroy();
             session()->forget('checkout');
-    
+        
+        $this->sendOrderConfirmationMail($order);
        
     }
 
@@ -203,6 +206,33 @@ class CheckoutComponent extends Component
             return redirect()->route('product.cart');
         }
     }
+
+
+
+    public function resetCart(){
+
+        $this->thankyou = 1;
+        Cart::instance('cart')->destroy();
+        session()->forget('checkout');
+    }
+
+
+    public function makeTransaction($order_id,$status){
+
+
+        $transaction = new Transaction();
+        $transaction->user_id = Auth::user()->id;
+        $transaction->order_id = $order_id;
+        $transaction->mode = $this->paymentmode;
+        $transaction->status = $status;
+        $transaction->save();
+    }
+
+    public function sendOrderConfirmationMail($order){
+
+        Mail::to($order->email)->send(new OrderMail($order));
+    }
+
     
 
     public function render()
