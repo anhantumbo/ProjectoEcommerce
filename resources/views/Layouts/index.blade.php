@@ -111,6 +111,10 @@
                                                         </li>
 
 														<li class="menu-item" >
+                                                        <a title="Mensagens de Contactos" href="{{route('admin.contact')}}">Mensagens de Contact</a>
+                                                        </li>
+
+														<li class="menu-item" >
                                                         <a title="Settings" href="{{route('admin.settings')}}">Definições</a>
                                                         </li>
 

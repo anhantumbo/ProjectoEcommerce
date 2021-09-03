@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Contact;
+use App\Models\Setting;
 use Livewire\Component;
 
 class ContactComponent extends Component
@@ -37,10 +39,21 @@ class ContactComponent extends Component
         'comment' => 'required'
 
     ]);
+
+      $contact = new Contact();
+      $contact->name = $this->name;
+      $contact->email = $this->email;
+      $contact->phone = $this->phone;
+      $contact->comment = $this->comment;
+      $contact->save(); 
+      session()->flash('message','Thanks Your message has been sent successFully!');
+
+
    }
 
     public function render()
-    {
-        return view('livewire.contact-component');
+    {   
+        $setting = Setting::find(1);
+        return view('livewire.contact-component',['setting'=>$setting])->layout('layouts.index');
     }
 }

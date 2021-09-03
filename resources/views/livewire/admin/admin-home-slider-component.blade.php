@@ -58,8 +58,8 @@
                                 <td>{{$slider->created_at}}</td>
                                
                                 <td>
-                                    <a href="{{route('admin.edithomeslider',['slider_id'=>$slider->id])}}" ><i class="fa fa-edit fa-2x"></i></a>
-                                    <a href="" wire:click.prevent="deleteSlider({{$slider->id}})" style="margin-left: 10px;"><i class="fa fa-times fa-2x text-danger"></i></a>
+                                    <a href="{{route('admin.edithomeslider',['slider_id'=>$slider->id])}}" ><i class="fa fa-edit fa-2x"></i></a></td>
+                                    <td><a href="" wire:click.prevent="deleteSlider({{$slider->id}})" style="margin-left: 10px;"><i class="fa fa-times fa-2x text-danger"></i></a>
 
                                 </td>
                             </tr>
